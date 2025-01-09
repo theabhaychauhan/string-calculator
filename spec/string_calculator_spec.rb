@@ -7,7 +7,7 @@ RSpec.describe StringCalculator do
 				@string_sum = StringCalculator.add("")
 			end
 
-			it "Does something" do
+			it "Returns 0" do
 				expect(@string_sum).to eq(0)
 			end
 		end
