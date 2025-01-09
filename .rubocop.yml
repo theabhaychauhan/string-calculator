@@ -1,0 +1,7 @@
+# .rubocop.yml
+
+# Disable Metrics/BlockLength rule for spec files
+Metrics/BlockLength:
+  Enabled: false
+  Exclude:
+    - 'spec/**/*'
