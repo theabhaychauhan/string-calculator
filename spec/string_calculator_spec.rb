@@ -1,9 +1,15 @@
 require "string_calculator"
 
 RSpec.describe StringCalculator do
-	describe '#hello_world' do
-		it 'returns the string "Hello, World!"' do
-			expect(StringCalculator.hello_world).to eq("Hello, World!")
+	describe '#add' do
+		context "When empty string is passed" do
+			before :all do
+				@string_sum = StringCalculator.add("")
+			end
+
+			it "Does something" do
+				expect(@string_sum).to eq(0)
+			end
 		end
 	end
 end
