@@ -23,5 +23,13 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # Caches installed gems for faster subsequent runs
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+    - name: Run RuboCop
+      run: |
+        bundle exec rubocop --format simple
     - name: Run RSpec tests
-      run: bundle exec rspec --format documentation
+      run: |
+        bundle exec rspec --format documentation
