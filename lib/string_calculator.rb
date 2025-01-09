@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# require 'byebug'
+require 'byebug'
 
 # frozen_string_literal: true
 
@@ -10,7 +10,19 @@ class StringCalculator
   class << self
     def add(numbers_string)
       numbers = StringParser.parse(numbers_string)
+
+      check_negative_numbers!(numbers)
+
       numbers.sum
+    end
+
+    private
+
+    def check_negative_numbers!(numbers)
+      negative_numbers = numbers.select(&:negative?)
+      return if negative_numbers.empty?
+
+      raise ArgumentError, "Negative numbers not allowed. Negative numbers present -> #{negative_numbers.join(', ')}"
     end
   end
 

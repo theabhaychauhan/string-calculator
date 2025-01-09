@@ -69,5 +69,19 @@ RSpec.describe StringCalculator do
         expect(string_sum).to eq(6)
       end
     end
+
+    context 'When negative numbers are passed' do
+      it 'Raises an exception for a single negative number' do
+        expect { StringCalculator.add('-1') }.to raise_error(
+          ArgumentError, 'Negative numbers not allowed. Negative numbers present -> -1'
+        )
+      end
+
+      it 'Raises an exception for multiple negative numbers' do
+        expect { StringCalculator.add('-1,2,-3') }.to raise_error(
+          ArgumentError, 'Negative numbers not allowed. Negative numbers present -> -1, -3'
+        )
+      end
+    end
   end
 end
