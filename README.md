@@ -20,3 +20,5 @@ To contribute or run the project locally, follow these steps:
 4. Run the Tests
    ```bash
    bundle exec rspec
+
+I have also configured Github workflow. You can go through Actions of this repo to see how the tests have passed throughout the development journey.
