@@ -99,5 +99,21 @@ RSpec.describe StringCalculator do
         expect(string_sum).to eq(1003)
       end
     end
+
+    context 'When a custom delimiter of any length is used' do
+      let(:string_sum) { StringCalculator.add("//[***]\n1***2***3") }
+
+      it 'Handles delimiters of any length' do
+        expect(string_sum).to eq(6)
+      end
+    end
+
+    context 'When multiple custom delimiters of any length are used' do
+      let(:string_sum) { StringCalculator.add("//[***][;;]\n1***2;;3") }
+
+      it 'Handles multiple delimiters' do
+        expect(string_sum).to eq(6)
+      end
+    end
   end
 end
