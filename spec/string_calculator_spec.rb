@@ -83,5 +83,21 @@ RSpec.describe StringCalculator do
         )
       end
     end
+
+    context 'When numbers greater than 1000 are passed' do
+      let(:string_sum) { StringCalculator.add('2,1001') }
+
+      it 'Ignores numbers greater than 1000 and returns 2' do
+        expect(string_sum).to eq(2)
+      end
+    end
+
+    context 'When multiple numbers including numbers > 1000 are passed' do
+      let(:string_sum) { StringCalculator.add('1,2,1000,1001,2000') }
+
+      it 'Sums only numbers <= 1000 i.e (1 + 2 + 100)' do
+        expect(string_sum).to eq(1003)
+      end
+    end
   end
 end

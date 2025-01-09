@@ -27,6 +27,7 @@ class StringCalculator
   end
 
   DEFAULT_DELIMITER = ','
+  MAX_ALLOWED_NUMBER = 1000
 
   # The StringParser class is responsible for parsing a string of numbers
   # and converting them into an array of integers.
@@ -41,7 +42,8 @@ class StringCalculator
         DEFAULT_DELIMITER
       end
 
-      numbers_string.split(/[\n#{delimiter}]/).map(&:to_i)
+      numbers = numbers_string.split(/[\n#{delimiter}]/).map(&:to_i)
+      numbers.select { |number| number <= MAX_ALLOWED_NUMBER }
     end
 
     def self.extract_special_delimiter(numbers_string)
