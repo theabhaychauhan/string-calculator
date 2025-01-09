@@ -45,5 +45,29 @@ RSpec.describe StringCalculator do
         expect(string_sum).to eq(6)
       end
     end
+
+    context 'When custom delimiter is used' do
+      let(:string_sum) { StringCalculator.add("//;\n1;2") }
+
+      it 'Returns the sum - 3 using the special delimiter' do
+        expect(string_sum).to eq(3)
+      end
+    end
+
+    context 'When custom delimiter with multiple numbers is used' do
+      let(:string_sum) { StringCalculator.add("//|\n1|2|3|4|5") }
+
+      it 'Returns the sum - 15 using the special delimiter' do
+        expect(string_sum).to eq(15)
+      end
+    end
+
+    context 'When custom delimiter contains special characters' do
+      let(:string_sum) { StringCalculator.add("//.*\n1.*2.*3") }
+
+      it 'Returns the sum - 6 using the special delimiter with special characters' do
+        expect(string_sum).to eq(6)
+      end
+    end
   end
 end

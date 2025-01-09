@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# require 'byebug'
+
+# frozen_string_literal: true
+
 # The StringCalculator class provides a method for adding numbers from a
 # string input.
 class StringCalculator
@@ -10,13 +14,29 @@ class StringCalculator
     end
   end
 
+  DEFAULT_DELIMITER = ','
+
   # The StringParser class is responsible for parsing a string of numbers
   # and converting them into an array of integers.
   class StringParser
     def self.parse(numbers_string)
       return [] if numbers_string.empty?
 
-      numbers_string.split(/[\n,]/).map(&:to_i)
+      delimiter = DEFAULT_DELIMITER
+      if numbers_string.start_with?('//')
+        delimiter, numbers_string = extract_special_delimiter(numbers_string)
+      else
+        DEFAULT_DELIMITER
+      end
+
+      numbers_string.split(/[\n#{delimiter}]/).map(&:to_i)
+    end
+
+    def self.extract_special_delimiter(numbers_string)
+      delimiter_part, numbers_string = numbers_string.split("\n")
+      delimiter = delimiter_part[2..]
+
+      [delimiter, numbers_string]
     end
   end
 end
