@@ -25,5 +25,23 @@ RSpec.describe StringCalculator do
         expect(string_sum).to eq(3)
       end
     end
+
+		context "When unknown amount of numbers are passed" do
+			let(:numbers_string) { "1,2,3,4,5,6,7,8,9,10" }
+			let(:string_sum) { StringCalculator.add(numbers_string) }
+		
+			it "Returns the sum of all numbers" do
+				expected_sum = numbers_string.split(',').map(&:to_i).sum
+				expect(string_sum).to eq(expected_sum)
+			end
+		end
+
+		context "When newlines are used between numbers" do
+			let(:string_sum) { StringCalculator.add("1\n2,3") }
+		
+			it "Returns 6" do
+				expect(string_sum).to eq(6)
+			end
+		end		
   end
 end

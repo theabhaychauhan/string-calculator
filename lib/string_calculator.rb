@@ -12,7 +12,7 @@ class StringCalculator
     def self.parse(numbers_string)
       return [] if numbers_string.empty?
 
-      numbers_string.split(',').map(&:to_i)
+      numbers_string.split(/[\n,]/).map(&:to_i)
     end
   end  
 end
