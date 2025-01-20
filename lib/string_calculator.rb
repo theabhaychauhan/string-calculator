@@ -36,12 +36,12 @@ class StringCalculator
       return [] if numbers_string.empty?
 
       delimiter = DEFAULT_DELIMITER
+      numbers_string = handle_single_astrisk(numbers_string)
       if numbers_string.start_with?('//')
         delimiter, numbers_string = extract_special_delimiter(numbers_string)
       else
         DEFAULT_DELIMITER
       end
-
       numbers = numbers_string.split(/[\n#{delimiter}]/).map(&:to_i)
       numbers.select { |number| number <= MAX_ALLOWED_NUMBER }
     end
@@ -51,6 +51,18 @@ class StringCalculator
       delimiter = delimiter_part[2..]
 
       [delimiter, numbers_string]
+    end
+
+    def self.handle_single_astrisk(numbers_string)
+      if(numbers_string.include?('*') && !numbers_string.include?('**'))
+        chars = numbers_string.chars
+        index_of_astrisk = chars.find_index("*")
+        if chars[index_of_astrisk - 1].scan(/\D/).empty?
+          numbers_string = numbers_string.dup
+          numbers_string.gsub!("#{chars[index_of_astrisk - 1]}*#{chars[index_of_astrisk + 1]}", (chars[index_of_astrisk - 1].to_i * chars[index_of_astrisk + 1].to_i).to_s)
+        end
+      end
+      numbers_string
     end
   end
 end

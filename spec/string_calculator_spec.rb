@@ -115,5 +115,13 @@ RSpec.describe StringCalculator do
         expect(string_sum).to eq(6)
       end
     end
+
+    context "When '*' is present in the String" do
+      let(:string_sum) { StringCalculator.add("2*3,4") }
+
+      it "Multiplies two digits when '*' is encountered" do
+        expect(string_sum).to(eq(10))
+      end
+    end
   end
 end
